@@ -1,0 +1,145 @@
+
+local Decals = Instance.new("Folder")
+Decals.Name = "Decals"
+Decals.Parent = script
+local texture = "rbxassetid://89053414246485"
+
+for _, face in ipairs(Enum.NormalId:GetEnumItems()) do
+	local img = Instance.new("Decal")
+	img.Texture = texture
+	img.Face = face
+	img.Parent = Decals
+end
+
+local BackupTextureId = "rbxassetid://13916947586"
+
+local function replaceeverything(v, LessDetectable: boolean)
+	if v:IsA("BasePart") and v.Transparency < 0.99 and v:FindFirstChildWhichIsA("SpecialMesh") == nil and v.Parent ~= nil and v.Parent:FindFirstChildWhichIsA("Humanoid") == nil and v.Name ~= "AsukaPlushie" then
+		if v:FindFirstChildWhichIsA("SurfaceGui") == nil then
+			for i, g in pairs(script.Decals:GetChildren()) do
+				local e = g:Clone()
+				if LessDetectable == true then
+					e.Name = ""..math.random(1,20151255)
+				end
+				e.Parent = v
+			end
+		else
+			for i, g in pairs(script.Decals:GetChildren()) do
+				if g.Face ~= v:FindFirstChildWhichIsA("SurfaceGui").Face then
+					local e = g:Clone()
+					if LessDetectable == true then
+						e.Name = ""..math.random(1,20151255)
+					end
+					e.Parent = v
+				end
+			end
+		end
+	end
+
+	if v:IsA("ParticleEmitter") then
+		v.Texture = script.Decals.Decal.Texture
+	end
+
+	if v:IsA("Decal") and v.Name ~= "Face" and v.Name ~= "face" then
+		v.Texture = script.Decals.Decal.Texture
+	end
+	if v:IsA("Decal") and (v.Name == "Face" or v.Name == "face") then
+		v:Destroy()
+	end
+
+
+
+	if v:IsA("TextLabel") then
+		local image = Instance.new("ImageLabel")
+		image.Parent = v
+		image.Image = script.Decals.Decal.Texture
+		image.Size = UDim2.fromScale(1, 1)
+		image.Transparency = v.Transparency
+		image.Position = UDim2.fromScale(0, 0)
+		image.ImageColor3 = v.TextColor3
+		image.BackgroundColor3 = v.BackgroundColor3
+		image.BackgroundTransparency = v.BackgroundTransparency
+		image.ImageTransparency = v.TextTransparency
+		if LessDetectable == true then
+			image.Name = ""..math.random(1,20151255)
+		end
+		v.TextTransparency = 1
+		v.BackgroundTransparency = 1
+	end
+
+	if v:IsA("TextButton") then
+		local image = Instance.new("ImageLabel")
+		image.Parent = v
+		image.Image = script.Decals.Decal.Texture
+		image.Size = UDim2.fromScale(1, 1)
+		image.Transparency = v.Transparency
+		image.Position = UDim2.fromScale(0, 0)
+		image.ImageColor3 = v.TextColor3
+		image.BackgroundColor3 = v.BackgroundColor3
+		image.BackgroundTransparency = v.BackgroundTransparency
+		image.ImageTransparency = v.TextTransparency
+		if LessDetectable == true then
+			image.Name = ""..math.random(1,20151255)
+		end
+		v.TextTransparency = 1
+		v.BackgroundTransparency = 1
+	end
+
+	if v:IsA("UIStroke") then
+		v:Destroy()
+	end
+
+	if v:IsA("ImageLabel") then
+		v.Image = script.Decals.Decal.Texture
+	end
+
+	if v:IsA("ImageButton") then
+		v.Image = script.Decals.Decal.Texture
+	end
+
+	if v:IsA("Texture") then
+		v.Texture = script.Decals.Decal.Texture
+	end
+
+	if v:IsA("Sky") then
+		v.SunTextureId = script.Decals.Decal.Texture
+		v.MoonTextureId = script.Decals.Decal.Texture
+	end
+
+	if v:IsA("Trail") then
+		v.Texture = script.Decals.Decal.Texture
+	end
+
+	if v:IsA("Beam") then
+		v.Texture = script.Decals.Decal.Texture
+	end
+
+	--[[if v:IsA("CharacterMesh") then
+		v.BaseTextureId = "11965518687"
+		v.OverlayTextureId = "11965518687"
+		v.MeshId = "11965504823"
+	end]]
+
+	if v:IsA("Shirt") then
+		v.ShirtTemplate = "rbxassetid://4817145423"
+	end
+
+	if v:IsA("Pants") then
+		v.PantsTemplate = "rbxassetid://4817164940"
+	end
+
+	if v:IsA("ShirtGraphic") then
+		print("shirt garphgisc")
+		v.Graphic = "rbxassetid://11236779014"
+	end
+
+	if v:IsA("Tool") then
+		v.TextureId = script.Decals.Decal.Texture
+	end
+end
+
+local LessDetectable = false
+
+for i,v in pairs(game:GetDescendants()) do
+	replaceeverything(v, LessDetectable)
+end
